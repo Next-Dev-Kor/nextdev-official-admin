@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   BarChartIcon,
   CameraIcon,
@@ -19,7 +21,6 @@ import {
 } from "lucide-react";
 
 import { NavDocuments } from "@/components/nav-documents";
-import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -41,27 +42,27 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      href: "/dashboard",
       icon: LayoutDashboardIcon,
     },
     {
       title: "Lifecycle",
-      url: "#",
+      href: "/dashboard/lifecycle",
       icon: ListIcon,
     },
     {
       title: "Analytics",
-      url: "#",
+      href: "/dashboard/analytics",
       icon: BarChartIcon,
     },
     {
       title: "Projects",
-      url: "#",
+      href: "/dashboard/projects",
       icon: FolderIcon,
     },
     {
       title: "Team",
-      url: "#",
+      href: "/dashboard/team",
       icon: UsersIcon,
     },
   ],
@@ -70,86 +71,70 @@ const data = {
       title: "Capture",
       icon: CameraIcon,
       isActive: true,
-      url: "#",
+      href: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", href: "#" },
+        { title: "Archived", href: "#" },
       ],
     },
     {
       title: "Proposal",
       icon: FileTextIcon,
-      url: "#",
+      href: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", href: "#" },
+        { title: "Archived", href: "#" },
       ],
     },
     {
       title: "Prompts",
       icon: FileCodeIcon,
-      url: "#",
+      href: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", href: "#" },
+        { title: "Archived", href: "#" },
       ],
     },
   ],
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      href: "/settings",
       icon: SettingsIcon,
     },
     {
       title: "Get Help",
-      url: "#",
+      href: "/help",
       icon: HelpCircleIcon,
     },
     {
       title: "Search",
-      url: "#",
+      href: "/search",
       icon: SearchIcon,
     },
   ],
   documents: [
     {
       name: "Data Library",
-      url: "#",
+      href: "/docs/library",
       icon: DatabaseIcon,
     },
     {
       name: "Reports",
-      url: "#",
+      href: "/docs/reports",
       icon: ClipboardListIcon,
     },
     {
       name: "Word Assistant",
-      url: "#",
+      href: "/docs/word-assistant",
       icon: FileIcon,
     },
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -159,18 +144,43 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link href="/">
                 <span className="text-base font-semibold">Next Dev</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <SidebarMenu>
+          {data.navMain.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton
+                  asChild
+                  className={
+                    isActive
+                      ? "bg-muted text-foreground"
+                      : "hover:bg-accent hover:text-accent-foreground"
+                  }
+                >
+                  <Link href={item.href}>
+                    <item.icon className="mr-2 h-4 w-4" />
+                    {item.title}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
