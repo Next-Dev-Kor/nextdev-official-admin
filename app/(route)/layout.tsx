@@ -1,13 +1,7 @@
-// import Header from "@/components/header/header";
 import { PropsWithChildren } from "react";
 
-const RootLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <div>
-      {/* <Header /> */}
-      {children}
-    </div>
-  );
+const RootLayout = async ({ children }: PropsWithChildren) => {
+  return <>{children}</>;
 };
 
 export default RootLayout;
