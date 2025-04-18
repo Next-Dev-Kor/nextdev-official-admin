@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
-const Home = async () => {
+const RootPage = async () => {
   const supabase = createServerSupabaseClient();
   const {
     data: { session },
@@ -14,4 +14,4 @@ const Home = async () => {
   }
 };
 
-export default Home;
+export default RootPage;
