@@ -1,10 +1,12 @@
-import { ReactNode } from "react";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout() {
   return (
     <SidebarProvider>
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <ChartAreaInteractive />
+      </SidebarInset>
     </SidebarProvider>
   );
 }

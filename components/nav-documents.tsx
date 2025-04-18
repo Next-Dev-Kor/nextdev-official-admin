@@ -28,7 +28,7 @@ export function NavDocuments({
 }: {
   items: {
     name: string;
-    url: string;
+    href: string;
     icon: LucideIcon;
   }[];
 }) {
@@ -41,7 +41,7 @@ export function NavDocuments({
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
+              <a href={item.href}>
                 <item.icon />
                 <span>{item.name}</span>
               </a>

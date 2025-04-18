@@ -4,17 +4,14 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChartIcon,
   CameraIcon,
   ClipboardListIcon,
   DatabaseIcon,
   FileCodeIcon,
   FileIcon,
   FileTextIcon,
-  FolderIcon,
   HelpCircleIcon,
   LayoutDashboardIcon,
-  ListIcon,
   SearchIcon,
   SettingsIcon,
   UsersIcon,
@@ -44,21 +41,6 @@ const data = {
       title: "Dashboard",
       href: "/dashboard",
       icon: LayoutDashboardIcon,
-    },
-    {
-      title: "Lifecycle",
-      href: "/dashboard/lifecycle",
-      icon: ListIcon,
-    },
-    {
-      title: "Analytics",
-      href: "/dashboard/analytics",
-      icon: BarChartIcon,
-    },
-    {
-      title: "Projects",
-      href: "/dashboard/projects",
-      icon: FolderIcon,
     },
     {
       title: "Team",
