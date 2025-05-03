@@ -9,14 +9,14 @@ datasource db {
 }
 
 model User {
-  id           Int              @id @default(autoincrement())
-  email        String?          @unique
-  nickname     String           @unique
-  phoneNumber  String?          @unique
+  id           Int               @id @default(autoincrement())
+  email        String?           @unique
+  nickname     String            @unique
+  phoneNumber  String?           @unique
   profileImage String?
-  role         UserRole         @default(USER)
-  createdAt    DateTime         @default(now())
-  waitlist     RecruitWaitlist?
+  role         UserRole          @default(USER)
+  createdAt    DateTime          @default(now())
+  waitlist     RecruitWaitlist[]
 }
 
 model RecruitPost {
@@ -42,7 +42,7 @@ model Applicant {
 
 model RecruitWaitlist {
   id        Int      @id @default(autoincrement())
-  userId    Int      @unique
+  userId    Int
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
 }

@@ -74,7 +74,6 @@ export const columns: ColumnDef<WaitlistUser>[] = [
           variant="outline"
           size="sm"
           onClick={() => {
-            // TODO: 승인 처리 로직 구현
             console.log("승인할 사용자:", user);
           }}
         >
