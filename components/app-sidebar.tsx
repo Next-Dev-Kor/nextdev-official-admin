@@ -47,6 +47,11 @@ const data = {
       href: "/dashboard/team",
       icon: UsersIcon,
     },
+    {
+      title: "Waiting",
+      href: "/dashboard/waiting",
+      icon: ClipboardListIcon,
+    },
   ],
   navClouds: [
     {
