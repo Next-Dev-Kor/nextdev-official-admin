@@ -1,38 +1,63 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  // output   = "../lib/generated/prisma" // 커스텀 경로 지정할 경우 사용
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")   // Prisma Client에서 사용할 DB URL
+  directUrl = env("DIRECT_URL")     // Prisma CLI 명령어에서 직접 연결용 (push, migrate 등)
+}
+
+//
+// 사용자 계정 (카카오 로그인 등)
+//
+
+enum UserRole {
+  USER     // 일반 사용자
+  ADMIN    // 관리자
+  SUPER    // 슈퍼권한 사용자
 }
 
 model User {
-  id         Int    @id @default(autoincrement())
-  email      String    @unique
-  password   String
-  role       String    @default("user")
-  approved   Boolean   @default(false)
-  createdAt  DateTime  @default(now())
-  approvedAt DateTime?
-
-  logs Log[]
+  id           Int      @id @default(autoincrement()) // 기본 키
+  email        String?  @unique                       // 이메일 (선택적, 소셜 로그인 대비)
+  nickname     String   @unique                       // 유저 닉네임 (필수)
+  phoneNumber  String?  @unique                       // 전화번호 (선택)
+  profileImage String?                               // 프로필 이미지 URL
+  role         UserRole  @default(USER)               // ✅ 사용자 권한 (enum 사용)
+  createdAt    DateTime @default(now())               // 생성일
 }
 
-model Log {
-  id         Int    @id @default(autoincrement())
-  userId    Int
-  action    String
-  metaData  Json?
-  createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id])
+//
+// 모집 공고
+// 지원 기간에만 노출되고, 여러 명이 지원할 수 있음
+//
+model RecruitPost {
+  id           Int        @id @default(autoincrement()) // 공고 ID
+  title        String                                     // 공고 제목
+  description  String                                     // 공고 설명
+  thumbnailUrl String?                                    // 공고 대표 이미지 (선택) -> supabse storage -> 나중에 s3로 변경해도됨
+  startDate    DateTime                                   // 시작일
+  endDate      DateTime                                   // 종료일
+  createdAt    DateTime  @default(now())                  // 생성일
+
+  applicants   Applicant[]                                // 이 공고에 지원한 사람들
+}
+
+
+//
+// 지원자
+// 하나의 모집 공고에 지원한 개별 사용자 정보
+//
+model Applicant {
+  id             Int         @id @default(autoincrement()) // 지원 ID
+  name           String                                      // 지원자 이름
+  email          String                                      // 지원자 연락 이메일
+  message        String?                                     // 자기소개, 지원 동기 등
+  createdAt      DateTime    @default(now())                // 지원 시각
+
+  recruitPostId  Int                                         // 어떤 공고에 지원했는지
+  recruitPost    RecruitPost @relation(fields: [recruitPostId], references: [id]) // 관계 설정
 }
