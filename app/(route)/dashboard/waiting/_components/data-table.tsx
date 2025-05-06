@@ -115,7 +115,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  대기자가 없습니다.
                 </TableCell>
               </TableRow>
             )}

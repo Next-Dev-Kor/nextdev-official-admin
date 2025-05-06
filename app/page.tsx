@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 const RootPage = async () => {
-  return <div>awef</div>;
+  redirect("/dashboard");
 };
 
 export default RootPage;

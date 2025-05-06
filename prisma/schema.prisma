@@ -28,6 +28,7 @@ model RecruitPost {
   endDate      DateTime
   createdAt    DateTime    @default(now())
   applicants   Applicant[]
+  position     Position    
 }
 
 model Applicant {
@@ -51,4 +52,13 @@ enum UserRole {
   USER
   ADMIN
   SUPER
+}
+
+enum Position {
+  FRONTEND
+  BACKEND
+  DESIGNER
+  PLANNER
+  AOS
+  IOS
 }

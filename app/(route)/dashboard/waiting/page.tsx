@@ -15,8 +15,6 @@ async function getData() {
 export default async function WaitingPage() {
   const data = await getData();
 
-  console.log(data, "<<<<< waiting list");
-
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-4">대기 목록</h1>

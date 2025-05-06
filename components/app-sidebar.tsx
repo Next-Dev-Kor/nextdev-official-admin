@@ -4,12 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  CameraIcon,
   ClipboardListIcon,
   DatabaseIcon,
   FileCodeIcon,
   FileIcon,
-  FileTextIcon,
   HelpCircleIcon,
   LayoutDashboardIcon,
   SearchIcon,
@@ -52,34 +50,20 @@ const data = {
       href: "/dashboard/waiting",
       icon: ClipboardListIcon,
     },
+    {
+      title: "Recruit",
+      href: "/dashboard/recruit",
+      icon: FileCodeIcon,
+    },
   ],
   navClouds: [
     {
-      title: "Capture",
-      icon: CameraIcon,
-      isActive: true,
-      href: "#",
-      items: [
-        { title: "Active Proposals", href: "#" },
-        { title: "Archived", href: "#" },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: FileTextIcon,
-      href: "#",
-      items: [
-        { title: "Active Proposals", href: "#" },
-        { title: "Archived", href: "#" },
-      ],
-    },
-    {
-      title: "Prompts",
+      title: "Recruit",
       icon: FileCodeIcon,
-      href: "#",
+      href: "/dashboard/recruit/list",
       items: [
-        { title: "Active Proposals", href: "#" },
-        { title: "Archived", href: "#" },
+        { title: "Create", href: "/dashboard/recruit/create" },
+        { title: "List", href: "/dashboard/recruit/list" },
       ],
     },
   ],
