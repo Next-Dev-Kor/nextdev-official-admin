@@ -77,7 +77,7 @@ export const columns: ColumnDef<WaitlistUser>[] = [
             console.log("승인할 사용자:", user);
           }}
         >
-          승인
+          보내기
         </Button>
       );
     },

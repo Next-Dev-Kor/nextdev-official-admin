@@ -26,11 +26,13 @@ import { useState } from "react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  buttonText: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  buttonText,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -63,13 +65,8 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleBulkApprove}
-          disabled={table.getSelectedRowModel().rows.length === 0}
-        >
-          선택 승인
+        <Button variant="outline" size="sm" onClick={handleBulkApprove}>
+          {buttonText}
         </Button>
       </div>
       <div className="rounded-md border">

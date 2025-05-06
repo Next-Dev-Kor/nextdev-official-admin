@@ -27,8 +27,8 @@ model RecruitPost {
   startDate    DateTime
   endDate      DateTime
   createdAt    DateTime    @default(now())
+  position     Position
   applicants   Applicant[]
-  position     Position    
 }
 
 model Applicant {
