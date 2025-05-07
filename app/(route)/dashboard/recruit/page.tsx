@@ -1,8 +1,8 @@
-import { columns, RecruitPost } from "./_components/columns";
-
+import { RecruitPost } from "./_components/columns";
 import prisma from "@/lib/prisma";
 import dayjs from "dayjs";
-import { DataTable } from "@/app/(route)/dashboard/waiting/_components/data-table";
+
+import { RecruitTable } from "@/app/(route)/dashboard/recruit/_components/recruit-table";
 
 const getData = async (): Promise<RecruitPost[]> => {
   const posts = await prisma.recruitPost.findMany();
@@ -21,7 +21,7 @@ export default async function RecruitPage() {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-4">공고글 목록</h1>
-      <DataTable columns={columns} data={data} buttonText="공고글 등록" />
+      <RecruitTable data={data} />
     </div>
   );
 }

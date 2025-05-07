@@ -27,12 +27,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   buttonText: string;
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   buttonText,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -95,6 +97,10 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onRowClick?.(row.original)}
+                  className={
+                    onRowClick ? "cursor-pointer hover:bg-muted/50" : ""
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -112,7 +118,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  대기자가 없습니다.
+                  No Result
                 </TableCell>
               </TableRow>
             )}

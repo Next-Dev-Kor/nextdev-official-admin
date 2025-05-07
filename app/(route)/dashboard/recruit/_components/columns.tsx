@@ -1,3 +1,5 @@
+"use client";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { Position } from "@prisma/client";
 
@@ -19,6 +21,12 @@ export const columns: ColumnDef<RecruitPost>[] = [
   {
     accessorKey: "description",
     header: "설명",
+    size: 300,
+    cell: ({ row }) => (
+      <div className="max-w-[300px] truncate">
+        {row.getValue("description")}
+      </div>
+    ),
   },
   {
     accessorKey: "position",
