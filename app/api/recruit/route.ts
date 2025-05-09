@@ -2,6 +2,24 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { Position } from "@prisma/client";
 
+export async function GET() {
+  try {
+    const recruits = await prisma.recruitPost.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return NextResponse.json(recruits);
+  } catch (error) {
+    console.error("Error fetching recruit posts:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch recruit posts" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();

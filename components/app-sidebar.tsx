@@ -7,8 +7,6 @@ import {
   ClipboardListIcon,
   DatabaseIcon,
   FileCodeIcon,
-  FileIcon,
-  HelpCircleIcon,
   LayoutDashboardIcon,
   SearchIcon,
   SettingsIcon,
@@ -74,11 +72,6 @@ const data = {
       icon: SettingsIcon,
     },
     {
-      title: "Get Help",
-      href: "/help",
-      icon: HelpCircleIcon,
-    },
-    {
       title: "Search",
       href: "/search",
       icon: SearchIcon,
@@ -86,7 +79,7 @@ const data = {
   ],
   documents: [
     {
-      name: "Data Library",
+      name: "Data",
       href: "/docs/library",
       icon: DatabaseIcon,
     },
@@ -94,11 +87,6 @@ const data = {
       name: "Reports",
       href: "/docs/reports",
       icon: ClipboardListIcon,
-    },
-    {
-      name: "Word Assistant",
-      href: "/docs/word-assistant",
-      icon: FileIcon,
     },
   ],
 };
