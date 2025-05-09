@@ -15,12 +15,17 @@ export function RecruitTable({ data }: RecruitTableProps) {
     router.push(`/dashboard/recruit/${row.id}`);
   };
 
+  const handleButtonClick = () => {
+    router.push("/dashboard/recruit/create");
+  };
+
   return (
     <DataTable
       columns={columns}
       data={data}
-      buttonText="공고글 등록"
+      buttonText="공고 등록"
       onRowClick={handleRowClick}
+      onButtonClick={handleButtonClick}
     />
   );
 }

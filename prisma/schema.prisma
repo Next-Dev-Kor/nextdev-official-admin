@@ -59,6 +59,5 @@ enum Position {
   BACKEND
   DESIGNER
   PLANNER
-  AOS
-  IOS
+  
 }

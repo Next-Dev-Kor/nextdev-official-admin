@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   buttonText: string;
   onRowClick?: (row: TData) => void;
+  onButtonClick?: () => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -35,6 +36,7 @@ export function DataTable<TData, TValue>({
   data,
   buttonText,
   onRowClick,
+  onButtonClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -57,17 +59,10 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const handleBulkApprove = () => {
-    const selectedRows = table.getSelectedRowModel().rows;
-    const selectedUsers = selectedRows.map((row) => row.original);
-    // TODO: 일괄 승인 처리 로직 구현
-    console.log("선택된 사용자들:", selectedUsers);
-  };
-
   return (
     <div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button variant="outline" size="sm" onClick={handleBulkApprove}>
+        <Button variant="outline" size="sm" onClick={onButtonClick}>
           {buttonText}
         </Button>
       </div>

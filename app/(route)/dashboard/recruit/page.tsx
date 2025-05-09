@@ -20,7 +20,7 @@ export default async function RecruitPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-4">공고글 목록</h1>
+      <h1 className="text-2xl font-bold mb-4">공고 목록</h1>
       <RecruitTable data={data} />
     </div>
   );

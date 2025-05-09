@@ -1,26 +1,36 @@
+"use client";
+
 import { columns } from "@/app/(route)/dashboard/waiting/_components/column";
 import { DataTable } from "@/app/(route)/dashboard/waiting/_components/data-table";
-import prisma from "@/lib/prisma";
+import { useEffect, useState } from "react";
 
-async function getData() {
-  const waitlist = await prisma.recruitWaitlist.findMany({
-    include: {
-      user: true,
-    },
-  });
+export default function WaitingPage() {
+  const [data, setData] = useState([]);
 
-  return waitlist;
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/waiting");
+      const result = await response.json();
+      setData(result);
+    };
 
-export default async function WaitingPage() {
-  const data = await getData();
+    fetchData();
+  }, []);
 
-  console.log(data, "<<<<<");
+  const handleButtonClick = () => {
+    // TODO: 일괄 승인 처리 로직 구현
+    console.log("전체 보내기");
+  };
 
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-4">공고 대기 목록</h1>
-      <DataTable columns={columns} data={data} buttonText="전체 보내기" />
+      <DataTable
+        columns={columns}
+        data={data}
+        buttonText="전체 보내기"
+        onButtonClick={handleButtonClick}
+      />
     </div>
   );
 }
