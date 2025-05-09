@@ -59,5 +59,4 @@ enum Position {
   BACKEND
   DESIGNER
   PLANNER
-  
 }
