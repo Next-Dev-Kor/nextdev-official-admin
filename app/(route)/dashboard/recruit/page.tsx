@@ -18,6 +18,7 @@ const getData = async (): Promise<RecruitPost[]> => {
 export default async function RecruitPage() {
   const data = await getData();
 
+  console.log(data, "<<<<< Recruit");
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-4">공고 목록</h1>
